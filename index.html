@@ -1,0 +1,668 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>2Checkout - Your online payment solution</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://edge.avangate.net/static/css-order-03e7a650a4df6e0c2077f07aa1073acc-V110/20210330110650.css">
+    <style type="text/css">
+        /* CSS of the text+link */
+        #wia-text {
+            font-size: 12px;
+            line-height: 18px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: block;
+            clear: both;
+        }
+
+        #wia-text a {
+            font-size: 12px;
+        }
+
+        /* CSS inside the popup */
+        #wia-popup .logo-avangate {
+            width: 150px;
+            height: 29px;
+            background-image: url('https://edge.avangate.net/images/merchant/9457fc28ceb408103e13533e4a5b6bd1/logo_avangate_29px.gif?20180619142939');
+            background-repeat: no-repeat;
+            margin: 5px 0px;
+            padding: 0;
+        }
+
+        #wia-popup .logo-vendor {
+            float: right;
+        }
+
+        /* customize this */
+        #wia-popup .title {
+            font-size: 20px;
+            font-weight: bold;
+            display: inline-block;
+            padding: 5px 0px;
+        }
+
+        #wia-popup .description {
+            text-align: left;
+            font-size: 12px;
+            color: #111111;
+            display: inline-block;
+            padding: 5px 0px;
+            line-height: 19px;
+        }
+
+        #wia-popup table.icons {
+            margin-top: 10px;
+        }
+
+        #wia-popup table.icons img {
+            border: none;
+            outline: none;
+        }
+
+        #wia-popup table.icons a {
+            border: none;
+            outline: none;
+        }
+
+        .ui-widget-overlay {
+            opacity: 0.6;
+            filter: Alpha(Opacity=60);
+        }
+
+        .wia-popup {
+            -moz-border-radius: 6px;
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
+        }
+
+        .wia-popup .ui-dialog-titlebar {
+            -moz-border-radius: 6px;
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
+        }
+
+
+        /* Custom CSS for custom coupon facade */
+        #input-coupon-facade {
+            width: 180px;
+            padding: 2px;
+            color: #ccc;
+        }
+
+        #input-coupon-facade:focus {
+            color: black;
+            background-color: #FFFFC5;
+        }
+
+        .error-coupon {
+            border: 2px solid red !important;
+        }
+
+        #update_coupon {
+            background-position: 0px -261px;
+            width: 14px;
+            height: 12px;
+            border: none;
+            background-color: transparent;
+            margin-left: 5px;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+
+        .order__icon__delete {
+            cursor: pointer;
+            background-position: -26px -1127px;
+            width: 16px;
+            height: 16px;
+            padding: 0px;
+        }
+
+        /*  Custom CSS for the custom_qty_field_plus_minus() function. */
+        .table-custom-qty {
+            height: 24px;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        .table-custom-qty td {
+            padding: 0;
+            margin: 0;
+            border-collapse: collapse;
+            vertical-align: middle;
+        }
+
+        .table-custom-qty input {
+            width: 25px;
+            font-size: 12px;
+            padding: 3px;
+            border: 1px solid #ccc;
+        }
+
+        .table-custom-qty input:focus {
+            background: #FFFFC5;
+        }
+
+        .table-custom-qty .img-plus {
+            background-position: -114px -1127px;
+            width: 11px;
+            height: 11px;
+            margin: 0;
+            padding: 0;
+            cursor: pointer;
+            vertical-align: auto !important;
+        }
+
+        .table-custom-qty .img-minus {
+            background-position: -114px -1138px;
+            width: 11px;
+            height: 11px;
+            margin: 0;
+            padding: 0;
+            cursor: pointer;
+            vertical-align: auto !important;
+            margin-top: 1px;
+        }
+
+
+
+        /** CART STEPS **/
+        #cart-steps {
+            display: table;
+            margin: 10px auto 10px auto;
+        }
+
+        #cart-steps table td {
+            /*width:33%;*/
+        }
+
+        #cart-steps .selected {
+            font-weight: bold;
+        }
+
+        #cart-steps .completed div {
+            color: black !important;
+        }
+
+        #cart-steps td.step {
+            text-align: center;
+        }
+
+        #cart-steps td.step-img {
+            border-bottom: 2px dotted #999999;
+            height: 20px;
+        }
+
+        #cart-steps td.selected-img {
+            background-image: url('https://edge.avangate.net/images/merchant/6531b32f8d02fece98ff36a64a7c8260/steps-cart-icon.gif?20100602121508');
+            background-position: center top;
+            background-repeat: no-repeat;
+        }
+
+        #cart-steps td.completed-img {
+            border-bottom: 2px solid black !important;
+        }
+
+        #cart-steps div.txt {
+            white-space: nowrap;
+            padding: 5px 15px 5px 15px;
+            color: #999999;
+        }
+
+        /* custom footer menu */
+        .footer-left {
+            float: left;
+            width: 320px;
+            padding: 10px 0px;
+            margin-right: 15px;
+        }
+
+        .footer-right {
+            float: left;
+            width: 320px;
+            padding: 10px 0px;
+        }
+
+        .footer-box-new {
+            /*width:700px;*/
+            margin: 0px auto;
+            display: block;
+            clear: both;
+        }
+
+        #order__processedby {
+            clear: both;
+        }
+
+        #order__secure__seal {
+            clear: both;
+        }
+
+        .order__statement__label {
+            font-weight: bold;
+            display: inline-block;
+            clear: both;
+            padding-bottom: 10px;
+        }
+
+        .order__statement__value {
+            display: inline-block;
+            clear: both;
+        }
+
+        #order__statement__reseller {
+            padding-top: 10px;
+        }
+
+        /* corectura ui selectmenu */
+        .ui-selectmenu {
+            width: 263px !important;
+            background-color: white;
+            border: 1px solid #B7B7B7;
+        }
+
+        a.ui-selectmenu {
+            color: black;
+        }
+
+        .ui-selectmenu-status {
+            font-size: 12px;
+        }
+
+        .ui-selectmenu-open {
+            width: 263px !important;
+        }
+
+        .ui-selectmenu-menu a,
+        .ui-selectmenu-menu a:link,
+        .ui-selectmenu-menu a:visited,
+        .ui-selectmenu-menu a:hover {
+            font-size: 12px;
+            color: black;
+        }
+
+        /* custom css */
+        body {
+            background-color: #ECECEC;
+        }
+
+        table.wrap-main-table {
+            width: 860px;
+            margin: 10px auto;
+        }
+
+        td.wrap-content {
+            background-color: white;
+        }
+
+        td.table-left-col {
+            padding: 20px;
+        }
+
+        td.table-right-col {
+            width: 200px;
+            text-align: center;
+            padding: 20px;
+            padding-left: 10px;
+        }
+
+        div.pay-pics-right-col {
+            margin-bottom: 10px;
+            margin-top: 7px;
+        }
+
+        table.table-products td.order__listing__item__name {
+            width: 60%;
+            padding-right: 15px;
+        }
+
+        td.order__listing__item__name {
+            width: 60%;
+            padding-right: 15px;
+        }
+
+        #order__container {
+            width: 680px;
+        }
+
+        .order__box .order__box__title {
+            background-color: #EEEEEE;
+        }
+
+        .order__finish__button.submit-button {
+            background-color: #6490BE;
+        }
+
+        .order__finish__button.submit-super.submit-button {
+            font-size: 16px;
+        }
+
+        .order__finish__button.submit-large.submit-super.submit-button {
+            padding: 5px 16px;
+        }
+
+        input.order__text__field,
+        textarea.order__textarea__field,
+        select.order__select__field {
+            background-color: white;
+            border-color: #B7B7B7;
+            border-style: solid;
+            border-width: 1px;
+            font-family: inherit;
+            font-size: inherit;
+            padding: 2px;
+        }
+
+        input.order__text__field:focus,
+        textarea.order__textarea__field:focus,
+        select.order__select__field:focus {
+            background-color: #FFFFC5;
+        }
+
+        input.text,
+        textarea.textarea,
+        select.select {
+            background-color: white;
+            border-color: #B7B7B7;
+            border-style: solid;
+            border-width: 1px;
+            font-family: inherit;
+            font-size: inherit;
+            padding: 2px;
+        }
+
+        input.text:focus,
+        textarea.textarea:focus,
+        select.select:focus {
+            background-color: #FFFFC5;
+        }
+
+        span.order__help_billing,
+        .order__checkout__billing .order__separator,
+        #Update {
+            display: none;
+        }
+
+        #company_radio {
+            margin-left: 10px;
+        }
+
+        .products-totals {
+            margin-bottom: 5px;
+        }
+
+        #order__page__product .order__product__options {
+            clear: both;
+        }
+    </style>
+</head>
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+    <table cellspacing="0" cellpadding="0" class="wrap-main-table">
+        <tr>
+            <td valign="top" class="wrap-content">
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td valign="top" class="table-left-col">
+                            <div id="order__container">
+                                <input type="hidden" name="action" id="action" value="" />
+                                <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <div id="order__page__checkcart" class="order__page">
+                                                <div id="order__content">
+                                                    <ul class="order__checkout">
+                                                        <li id="order__cart__contents" class="order__products__listing">
+                                                            <div id="order__cart__contents"
+                                                                class="order__products__listing">
+                                                                <div class="order__box" style="">
+                                                                    <div class="order__box__aux1">
+                                                                        <div class="order__box__aux2">
+                                                                            <div class="order__box__title">
+                                                                                <div class="order__box__aux1">
+                                                                                    <div class="order__box__aux2">
+                                                                                        Products in your shopping cart
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="order__box__content">
+                                                                                <div class="order__box__aux1">
+                                                                                    <div class="order__box__aux2">
+                                                                                        <div id="order__products">
+                                                                                            <table width="95%"
+                                                                                                cellpadding="2"
+                                                                                                cellspacing="0"
+                                                                                                border="0"
+                                                                                                class="order__cart__products__table">
+                                                                                                <tr class="order__listing__header"
+                                                                                                    valign="baseline">
+                                                                                                    <td
+                                                                                                        class="order__listing__header__name">
+                                                                                                        Product/Service
+                                                                                                        name</td>
+                                                                                                    <td
+                                                                                                        class="order__listing__header__delivery">
+                                                                                                        Delivery</td>
+                                                                                                    <td
+                                                                                                        class="order__listing__header__qty">
+                                                                                                        Quantity</td>
+                                                                                                    <td
+                                                                                                        class="order__listing__header__unit__price">
+                                                                                                        Unit price</td>
+                                                                                                    <td
+                                                                                                        class="order__listing__header__total__price">
+                                                                                                        Value</td>
+                                                                                                    <td
+                                                                                                        class="order__listing__header__remove">
+                                                                                                        Remove</td>
+                                                                                                </tr>
+
+
+                                                                                                <tr class="order__listing__row"
+                                                                                                    id="order__listing__row__4713662">
+                                                                                                    <td
+                                                                                                        class="order__listing__item__name  ">
+                                                                                                        2Checkout
+                                                                                                        Premium
+                                                                                                        <div
+                                                                                                            class="order__product__options">
+                                                                                                            <span
+                                                                                                                class="order__product__options__text">
+                                                                                                                Selected option:
+                                                                                                                </span>
+                                                                                                                1 Year Subscription
+                                                                                                        </div>
+                                                                                                    </td>
+                                                                                                    <td class="order__listing__item__delivery">
+                                                                                                        Electronic
+                                                                                                    </td>
+                                                                                                    <td class="order__listing__item__qty">
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            value="1"
+                                                                                                            name="qty0"
+                                                                                                            size='3'
+                                                                                                            maxlength="4"
+                                                                                                            class="order__text__field order__text__field__qty">
+                                                                                                    </td>
+                                                                                                    <td nowrap
+                                                                                                        class="order__listing__item__unit__price">
+
+
+                                                                                                        163,82 LEI
+                                                                                                    </td>
+                                                                                                    <td nowrap
+                                                                                                        class="order__listing__item__total__price">
+
+
+                                                                                                        163,82 LEI
+                                                                                                    </td>
+                                                                                                    <td align="right"
+                                                                                                        class="order__listing__item__remove">
+                                                                                                        <input
+                                                                                                            type="checkbox"
+                                                                                                            name="rmv0"
+                                                                                                            value="4713662">
+                                                                                                        <input
+                                                                                                            type="hidden"
+                                                                                                            name="prod0"
+                                                                                                            value="4713662">
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </table>
+                                                                                        </div>
+                                                                                        <div id="order__totals">
+                                                                                            <div>
+                                                                                                <table width="95%"
+                                                                                                    border="0"
+                                                                                                    cellpadding="2"
+                                                                                                    cellspacing="0"
+                                                                                                    class="order__checkout__summary">
+
+                                                                                                    <tr>
+                                                                                                        <td
+                                                                                                            align="right">
+                                                                                                            <hr class="order__separator"
+                                                                                                                noshade>
+                                                                                                        </td>
+                                                                                                    </tr>
+
+                                                                                                    <tr
+                                                                                                        id="order__sub__total__row">
+                                                                                                        <td>
+                                                                                                            <div class="order__sub__total"
+                                                                                                                id="order__sub__total__1">
+                                                                                                                Subtotal:
+                                                                                                                163,82
+                                                                                                                LEI
+                                                                                                            </div>
+
+                                                                                                            <div class="order__sub__total"
+                                                                                                                id="order__sub__total__2">
+                                                                                                                Total
+                                                                                                                VAT
+                                                                                                                <span
+                                                                                                                    class="order__vat__percentage">(19%)</span>
+                                                                                                                :
+                                                                                                                31,12
+                                                                                                                LEI
+                                                                                                            </div>
+                                                                                                            <div class="order__total "
+                                                                                                                id="order__sub__total__3">
+                                                                                                                Total
+                                                                                                                price:
+                                                                                                                194,94
+                                                                                                                LEI
+                                                                                                            </div>
+                                                                                                            <div class="order__billing__currency__note"
+                                                                                                                id="order__sub__total__4">
+                                                                                                                The
+                                                                                                                billing
+                                                                                                                currency
+                                                                                                                is RON
+                                                                                                                (LEI)
+                                                                                                            </div>
+                                                                                                            <div
+                                                                                                                style="clear:both">
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                    </tr>
+
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            <div
+                                                                                                                id="order__update__cart">
+                                                                                                                <input
+                                                                                                                    type="hidden"
+                                                                                                                    id="Update_hidden"
+                                                                                                                    value="true">
+                                                                                                                <input
+                                                                                                                    type="hidden"
+                                                                                                                    id="submit_type"
+                                                                                                                    name="submit_type">
+                                                                                                                <input
+                                                                                                                    type="button"
+                                                                                                                    class="order__button order__update__cart__button"
+                                                                                                                    name="Update"
+                                                                                                                    id="Update"
+                                                                                                                    value="Update cart"
+                                                                                                                    onclick="this.disabled=true;document.getElementById('submit_type').value='cross_selling';document.getElementById('Update_hidden').name=this.name;this.form.submit();">
+                                                                                                            </div>
+                                                                                                            <div
+                                                                                                                id="order__coupon__input">
+                                                                                                            </div>
+
+                                                                                                            <div
+                                                                                                                style="clear:both">
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                    </tr>
+
+
+                                                                                                    <tr>
+                                                                                                        <td
+                                                                                                            class="textsmall">
+                                                                                                            <div
+                                                                                                                class="order__vat__note">
+                                                                                                                The
+                                                                                                                total
+                                                                                                                price
+                                                                                                                inclusive
+                                                                                                                of
+                                                                                                                applicable
+                                                                                                                taxes
+                                                                                                                will be
+                                                                                                                displayed
+                                                                                                                before
+                                                                                                                the
+                                                                                                                order is
+                                                                                                                transmitted.
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </table>
+                                                                                            </div>
+
+                                                                                            <!-- CROSS SELLING -->
+                                                                                            <!-- / CROSS SELLING -->
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="order__box__footer">
+                                                                                <div class="order__box__aux1">
+                                                                                    <div class="order__box__aux2">
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <input type="hidden" name="Update" value="true">
+                                                                <input type="hidden" id="Checkout_hidden" value="true">
+                                                            </div>
+                                                        
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
