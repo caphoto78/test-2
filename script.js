@@ -12,12 +12,41 @@ $(document).ready(function () {
   })
 
   $('table').before(document.createElement('div'));
-  $('body>div').addClass('backdrop');
+  $('body>div').addClass('backdrop hide');
   $('table').before('<div class="modal"></div>');
-  $('.modal').append('<div class="close"></div>')
-  $('.modal').append('<h1>WAIT!</h1>')
-  $('.modal').append('<h2>Don\'t leave!</h2>')
-  $('.modal').append('<h3>Complete your order with 20% discount</h3>')
-  $('.modal').append('<p>"Worth every penny!"</p>')
-  $('.modal').append('<button>Complete my order</button>')
+  $('.modal').addClass('hide');
+  $('.modal').append('<div class="close"></div>');
+  $('.modal').append('<h1>WAIT!</h1>');
+  $('.modal').append('<h2>Don\'t leave!</h2>');
+  $('.modal').append('<h3>Complete your order with 20% discount</h3>');
+  $('.modal').append('<p>"Worth every penny!"</p>');
+  $('.modal').append('<button>Complete my order</button>');
+
+  $('.close').click(function (e) {
+    e.preventDefault();
+    $('.modal').addClass("hide");
+    $('.backdrop').addClass("hide");
+  });
+
+  $('button').click(function () {
+    $('.modal').addClass("hide");
+    $('.backdrop').addClass("hide");
+    var t1 = $('#order__listing__row__4713662 > .order__listing__item__unit__price').text();
+    var t2 = $('#order__listing__row__4713662 > .order__listing__item__total__price').text();
+    var t3 = $('#order__listing__row__4713663 > .order__listing__item__unit__price').text();
+    var t4 = $('#order__listing__row__4713663 > .order__listing__item__total__price').text();
+    $('#order__listing__row__4713662 > .order__listing__item__unit__price').text((parseInt(t1, 10) * 0.8).toFixed(2) + '$');
+    $('#order__listing__row__4713662 > .order__listing__item__total__price').text((parseInt(t2, 10) * 0.8).toFixed(2) + '$');
+    $('#order__listing__row__4713663 > .order__listing__item__unit__price').text((parseInt(t3, 10) * 0.8).toFixed(2) + '$');
+    $('#order__listing__row__4713663 > .order__listing__item__total__price').text((parseInt(t4, 10) * 0.8).toFixed(2) + '$');
+    $('#order__listing__row__4713663 > .order__listing__item__total__price').text(result[1].price + '$');
+  });
+
+  $('html').one('mouseleave', (function (e) {
+    if (e.pageY - $(window).scrollTop() <= 1) {
+      $('.modal').removeClass("hide");
+      $('.backdrop').removeClass("hide");
+    }
+  }));
+
 });
