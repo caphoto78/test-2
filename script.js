@@ -35,11 +35,13 @@ $(document).ready(function () {
     var t2 = $('#order__listing__row__4713662 > .order__listing__item__total__price').text();
     var t3 = $('#order__listing__row__4713663 > .order__listing__item__unit__price').text();
     var t4 = $('#order__listing__row__4713663 > .order__listing__item__total__price').text();
+
+    console.log(t5)
     $('#order__listing__row__4713662 > .order__listing__item__unit__price').text((parseInt(t1, 10) * 0.8).toFixed(2) + '$');
     $('#order__listing__row__4713662 > .order__listing__item__total__price').text((parseInt(t2, 10) * 0.8).toFixed(2) + '$');
     $('#order__listing__row__4713663 > .order__listing__item__unit__price').text((parseInt(t3, 10) * 0.8).toFixed(2) + '$');
     $('#order__listing__row__4713663 > .order__listing__item__total__price').text((parseInt(t4, 10) * 0.8).toFixed(2) + '$');
-    $('#order__listing__row__4713663 > .order__listing__item__total__price').text(result[1].price + '$');
+
   });
 
   $('html').one('mouseleave', (function (e) {
